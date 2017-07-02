@@ -1,24 +1,9 @@
-var circle = document.createElementNS(svgns, 'circle');
-var ball = new Ball({
-  r: 5,
-  cx: 250,
-  cy: 250,
-  dx: 5,
-  dy: 5,
-  fill: '#00f'
-});
-
 function Ball() {
-  this.r  = 0;
-  this.cx = 0;
-  this.cy = 0;
-  this.dx = 0;
-  this.dy = 0;
-  this.fill = '';
   this.initialize.apply(this, arguments);
 }
 
 Ball.prototype.initialize = function(option) {
+  this.ball = option.ball;
   this.r  = option.r;
   this.cx = option.cx;
   this.cy = option.cy;
@@ -28,11 +13,11 @@ Ball.prototype.initialize = function(option) {
 };
 
 Ball.prototype.draw = function() {
-  circle.setAttribute('r',  String(this.r));
-  circle.setAttribute('cx', String(this.cx));
-  circle.setAttribute('cy', String(this.cy));
-  circle.setAttribute('fill', this.fill);
-  stage.appendChild(circle);
+  this.ball.setAttribute('r',  String(this.r));
+  this.ball.setAttribute('cx', String(this.cx));
+  this.ball.setAttribute('cy', String(this.cy));
+  this.ball.setAttribute('fill', this.fill);
+  game.stage.base.appendChild(this.ball);
 };
 
 Ball.prototype.position = function() {
@@ -44,20 +29,14 @@ Ball.prototype.position = function() {
 
 Ball.prototype.move = function() {
   var pos = this.position();
-  if (pos.cx < this.r || pos.cx > 500 - this.r) {
+  if (pos.cx < this.r || pos.cx > game.stage.w - this.r) {
     this.dx *= -1;
   }
-  if (pos.cy < this.r || pos.cy > 500 - this.r) {
+  if (pos.cy < this.r || pos.cy > game.stage.h - this.r) {
     this.dy *= -1;
   }
   this.cx += this.dx;
   this.cy += this.dy;
-  circle.setAttribute('cx', String(this.cx));
-  circle.setAttribute('cy', String(this.cy));
+  this.ball.setAttribute('cx', String(this.cx));
+  this.ball.setAttribute('cy', String(this.cy));
 };
-
-ball.draw();
-
-setInterval(function() {
-  ball.move();
-}, parseInt(1000 / 60));

@@ -1,13 +1,9 @@
 function Block() {
-  this.x = 0;
-  this.y = 0;
-  this.w = 0;
-  this.h = 0;
-  this.fill = '';
   this.initialize.apply(this, arguments);
 }
 
 Block.prototype.initialize = function(option) {
+  this.block = option.block;
   this.x = option.x;
   this.y = option.y;
   this.w = option.w;
@@ -16,21 +12,31 @@ Block.prototype.initialize = function(option) {
 };
 
 Block.prototype.draw = function() {
-  var rect = document.createElementNS(svgns, 'rect');
-  rect.setAttribute('x',      String(this.x));
-  rect.setAttribute('y',      String(this.y));
-  rect.setAttribute('width',  String(this.w));
-  rect.setAttribute('height', String(this.h));
-  rect.setAttribute('fill',   this.fill);
-  stage.appendChild(rect);
+  this.block.setAttribute('x',      String(this.x));
+  this.block.setAttribute('y',      String(this.y));
+  this.block.setAttribute('width',  String(this.w));
+  this.block.setAttribute('height', String(this.h));
+  this.block.setAttribute('fill',   this.fill);
+  game.stage.base.appendChild(this.block);
 };
 
-var block = new Block({
-  x: 5,
-  y: 5,
-  w: 40,
-  h: 20,
-  fill: '#f00'
-});
+function initBlocks() {
+  var
+    blocks = [],
+    count  = 0;
 
-block.draw();
+  for (var i = 0; i < game.block.col; i++) {
+    for (var j = 0; j < game.block.row; j++) {
+      blocks[count] = new Block({
+        block: document.createElementNS(game.stage.svgns, 'rect'),
+        x: game.block.x + j * game.block.w,
+        y: game.block.y + i * game.block.h,
+        w: game.block.w,
+        h: game.block.h
+      });
+      blocks[count].draw();
+      count++;
+    }
+  }
+  return blocks;
+}
