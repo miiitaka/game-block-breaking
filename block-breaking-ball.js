@@ -38,7 +38,11 @@ Ball.prototype.move = function(paddle) {
       this.dy *= -1;
     }
   }
-  if (pos.cy < this.r || pos.cy > game.stage.h - this.r) {
+  if (pos.cy < this.r) {
+    this.dy *= -1;
+  }
+  if (pos.cy > game.stage.h - this.r) {
+    // GameOver
     this.dy *= -1;
   }
 
