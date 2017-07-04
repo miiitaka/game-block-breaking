@@ -25,16 +25,7 @@ function main() {
 
   setInterval(function() {
     paddle.move(game.pos.x);
-
-    if ( ball.y >= paddle.y - ball.y
-      && ball.y <= paddle.y + ball.y
-      && ball.x >= paddle.x - (paddle.w / 2)
-      && ball.x <= paddle.x + (paddle.w / 2)
-    ) {
-      ball.dy *= -1;
-    }
-
-    ball.move();
+    ball.move(paddle);
   }, parseInt(1000 / game.fps));
 }
 

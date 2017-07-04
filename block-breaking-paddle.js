@@ -26,9 +26,9 @@ Paddle.prototype.move = function (x) {
   if (this.x < 0) {
     this.x = 0;
   }
-  if (this.x > game.stage.w - game.paddle.w) {
-    this.x = game.stage.w - game.paddle.w;
+  if (this.x > game.stage.w - this.w) {
+    this.x = game.stage.w - this.w;
   }
 
   this.paddle.setAttribute('x', String(this.x));
-}
+};
