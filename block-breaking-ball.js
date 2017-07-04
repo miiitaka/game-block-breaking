@@ -27,14 +27,21 @@ Ball.prototype.position = function() {
   };
 };
 
-Ball.prototype.move = function() {
+Ball.prototype.move = function(paddle) {
   var pos = this.position();
+
   if (pos.cx < this.r || pos.cx > game.stage.w - this.r) {
     this.dx *= -1;
+  }
+  if (pos.cy >= paddle.y - this.r) {
+    if (pos.cx >= paddle.x && pos.cx <= paddle.x + paddle.w) {
+      this.dy *= -1;
+    }
   }
   if (pos.cy < this.r || pos.cy > game.stage.h - this.r) {
     this.dy *= -1;
   }
+
   this.cx += this.dx;
   this.cy += this.dy;
   this.ball.setAttribute('cx', String(this.cx));
