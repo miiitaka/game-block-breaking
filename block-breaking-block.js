@@ -40,3 +40,23 @@ function initBlocks() {
   }
   return blocks;
 }
+
+function hitBlocks(blocks, ball) {
+  var len = blocks.length;
+
+  for (var i = 0; i < len; i++) {
+    if (
+         ball.cy - ball.r <= blocks[i].y + blocks[i].h
+      && ball.cy + ball.r >= blocks[i].y
+      && ball.cx - ball.r <= blocks[i].x + blocks[i].w
+      && ball.cx + ball.r >= blocks[i].x
+    ) {
+      blocks[i].block.setAttribute('display', 'none');
+      blocks.splice(i, 1);
+      ball.dy *= -1;
+      break;
+    }
+  }
+
+  return blocks;
+}

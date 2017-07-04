@@ -23,8 +23,9 @@ function main() {
   paddle.draw();
   ball.draw();
 
-  setInterval(function() {
+  var setId = setInterval(function() {
     paddle.move(game.pos.x);
+    blocks = hitBlocks(blocks, ball);
     ball.move(paddle);
   }, parseInt(1000 / game.fps));
 }
