@@ -42,12 +42,12 @@ Ball.prototype.move = function(paddle) {
     this.dy *= -1;
   }
   if (pos.cy > game.stage.h - this.r) {
-    // GameOver
-    this.dy *= -1;
+    return false;
   }
 
   this.cx += this.dx;
   this.cy += this.dy;
   this.ball.setAttribute('cx', String(this.cx));
   this.ball.setAttribute('cy', String(this.cy));
+  return true;
 };
