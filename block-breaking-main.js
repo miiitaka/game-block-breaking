@@ -18,7 +18,7 @@ var ball = new Ball({
 });
 
 var blocks = initBlocks();
-
+console.log(blocks);
 function main() {
   paddle.draw();
   ball.draw();
@@ -26,7 +26,10 @@ function main() {
   var setId = setInterval(function() {
     paddle.move(game.pos.x);
     blocks = hitBlocks(blocks, ball);
-    ball.move(paddle);
+
+    if (game.start) {
+      ball.move(paddle);
+    }
   }, parseInt(1000 / game.fps));
 }
 

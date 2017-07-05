@@ -1,6 +1,7 @@
 'use strict';
 
 var game = {
+  start: false,
   fps: 60,
   pos: {
     x: 0
@@ -12,27 +13,29 @@ var game = {
     h : 500
   },
   paddle : {
-    x: 300,
+    x: 250,
     y: 450,
     w: 60,
     h: 10,
-    fill: '#f0f'
+    fill: '#000'
   },
   ball : {
     r : 5,
     cx: 250,
-    cy: 250,
-    dx: 5,
-    dy: 5,
+    cy: 400,
+    dx: 3,
+    dy: -3,
     fill: '#00f'
   },
   block : {
-    row: 10,
-    col: 5,
+    row: 5,
+    col: 10,
     x: 40,
     y: 40,
     w: 40,
-    h: 20
+    h: 20,
+    fill: '#000',
+    stroke: '#fff'
   }
 };
 
@@ -40,7 +43,11 @@ game.stage.base.setAttribute('xmlns',  game.stage.svgns);
 game.stage.base.setAttribute('width',  game.stage.w);
 game.stage.base.setAttribute('height', game.stage.h);
 
-window.addEventListener('mousedown', function (e) {}, false);
+window.addEventListener('mousedown', function (e) {
+  if (game.start === false) {
+    game.start = true;
+  }
+}, false);
 window.addEventListener('mousemove', function (e) {
   var rect = e.target.getBoundingClientRect();
   game.pos.x = e.clientX - rect.left;
