@@ -18,7 +18,7 @@ var ball = new Ball({
 });
 
 var blocks = initBlocks();
-console.log(blocks);
+
 function main() {
   paddle.draw();
   ball.draw();
@@ -27,8 +27,15 @@ function main() {
     paddle.move(game.pos.x);
     blocks = hitBlocks(blocks, ball);
 
+    if (blocks.length <= 0) {
+      clearInterval(setId);
+      alert('Game Clear!');
+    }
     if (game.start) {
-      ball.move(paddle);
+      if (!ball.move(paddle)) {
+        clearInterval(setId);
+        alert('Game Over!');
+      }
     }
   }, parseInt(1000 / game.fps));
 }
