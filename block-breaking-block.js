@@ -9,6 +9,7 @@ Block.prototype.initialize = function(option) {
   this.w = option.w;
   this.h = option.h;
   this.fill = option.fill;
+  this.stroke = option.stroke;
 };
 
 Block.prototype.draw = function() {
@@ -17,6 +18,7 @@ Block.prototype.draw = function() {
   this.block.setAttribute('width',  String(this.w));
   this.block.setAttribute('height', String(this.h));
   this.block.setAttribute('fill',   this.fill);
+  this.block.setAttribute('stroke', this.stroke);
   game.stage.base.appendChild(this.block);
 };
 
@@ -25,14 +27,16 @@ function initBlocks() {
     blocks = [],
     count  = 0;
 
-  for (var i = 0; i < game.block.col; i++) {
-    for (var j = 0; j < game.block.row; j++) {
+  for (var i = 0; i < game.block.row; i++) {
+    for (var j = 0; j < game.block.col; j++) {
       blocks[count] = new Block({
         block: document.createElementNS(game.stage.svgns, 'rect'),
         x: game.block.x + j * game.block.w,
         y: game.block.y + i * game.block.h,
         w: game.block.w,
-        h: game.block.h
+        h: game.block.h,
+        fill: game.block.fill,
+        stroke: game.block.stroke
       });
       blocks[count].draw();
       count++;
