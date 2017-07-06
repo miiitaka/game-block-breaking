@@ -40,10 +40,10 @@ var game = {
 };
 
 game.stage.base.setAttribute('xmlns',  game.stage.svgns);
-game.stage.base.setAttribute('width',  game.stage.w);
-game.stage.base.setAttribute('height', game.stage.h);
+game.stage.base.setAttribute('width',  String(game.stage.w));
+game.stage.base.setAttribute('height', String(game.stage.h));
 
-window.addEventListener('mousedown', function (e) {
+window.addEventListener('mousedown', function () {
   if (game.start === false) {
     game.start = true;
   }
