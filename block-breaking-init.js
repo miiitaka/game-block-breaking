@@ -44,14 +44,14 @@ game.stage.base.setAttribute('width',  String(game.stage.w));
 game.stage.base.setAttribute('height', String(game.stage.h));
 
 window.addEventListener('mousedown', function () {
-  if (game.start === false) {
+  if (!game.start) {
     game.start = true;
   }
 }, false);
+
 window.addEventListener('mousemove', function (e) {
-  var
-    elm  = document.getElementById('stage'),
-    rect = elm.getBoundingClientRect();
+  var rect = game.stage.base.getBoundingClientRect();
+
   if (e.clientX >= rect.left && e.clientX <= rect.right) {
     game.pos.x = e.clientX - rect.left;
   } else if (e.clientX < rect.left) {
