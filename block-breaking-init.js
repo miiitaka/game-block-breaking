@@ -49,6 +49,14 @@ window.addEventListener('mousedown', function () {
   }
 }, false);
 window.addEventListener('mousemove', function (e) {
-  var rect = e.target.getBoundingClientRect();
-  game.pos.x = e.clientX - rect.left;
+  var
+    elm  = document.getElementById('stage'),
+    rect = elm.getBoundingClientRect();
+  if (e.clientX >= rect.left && e.clientX <= rect.right) {
+    game.pos.x = e.clientX - rect.left;
+  } else if (e.clientX < rect.left) {
+    game.pos.x = 0;
+  } else if (e.clientX > rect.right) {
+    game.pos.x = game.stage.w;
+  }
 }, false);
