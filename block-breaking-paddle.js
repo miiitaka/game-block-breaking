@@ -23,9 +23,6 @@ Paddle.prototype.draw = function() {
 Paddle.prototype.move = function (x) {
   this.x = x;
 
-  if (this.x < 0) {
-    this.x = 0;
-  }
   if (this.x > game.stage.w - this.w) {
     this.x = game.stage.w - this.w;
   }

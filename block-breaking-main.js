@@ -37,7 +37,7 @@ function main() {
         alert('Game Over!');
       }
     }
-  }, parseInt(1000 / game.fps));
+  }, parseInt(1000 / game.fps, 10));
 }
 
 main();
