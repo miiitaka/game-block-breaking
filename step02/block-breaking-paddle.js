@@ -19,13 +19,3 @@ Paddle.prototype.draw = function() {
   this.paddle.setAttribute('fill',   this.fill);
   game.stage.base.appendChild(this.paddle);
 };
-
-Paddle.prototype.move = function (x) {
-  this.x = x;
-
-  if (this.x > game.stage.w - this.w) {
-    this.x = game.stage.w - this.w;
-  }
-
-  this.paddle.setAttribute('x', String(this.x));
-};
